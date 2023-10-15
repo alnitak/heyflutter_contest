@@ -15,6 +15,10 @@ dependencies:
   freezed_annotation: ^2.4.1
   hooks_riverpod: ^2.4.3
   riverpod_annotation: ^2.2.0
+  star_menu:
+    git:
+      url: https://github.com/alnitak/flutter_star_menu.git
+      ref: v3.1.4
   yoda:
     git:
       url: https://github.com/alnitak/yoda.git

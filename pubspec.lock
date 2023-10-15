@@ -544,6 +544,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  star_menu:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "v3.1.4"
+      resolved-ref: "44c54d185214e7694809107714b7832bbe04fb68"
+      url: "https://github.com/alnitak/flutter_star_menu.git"
+    source: git
+    version: "3.1.4"
   state_notifier:
     dependency: transitive
     description:
