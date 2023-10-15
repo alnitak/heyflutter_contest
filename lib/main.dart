@@ -21,8 +21,8 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         // useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
-          secondary: Colors.green,
+          seedColor: const Color.fromARGB(255, 120, 150, 75),
+          secondary: const Color.fromARGB(255, 120, 150, 75),
         ),
         scaffoldBackgroundColor: const Color.fromARGB(255, 236, 236, 236),
       ),
@@ -30,8 +30,8 @@ class MainApp extends StatelessWidget {
         // enable mouse dragging
         dragDevices: PointerDeviceKind.values.toSet(),
       ),
-      // home: SearchPage(),
-      home: OnBoarding(),
+      home: const SearchPage(),
+      // home: OnBoarding(),
     );
   }
 }

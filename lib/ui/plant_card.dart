@@ -1,10 +1,13 @@
 // ignore_for_file: avoid_positional_boolean_parameters
 
 import 'package:flutter/material.dart';
+import 'package:heyflutter/details.dart';
 import 'package:heyflutter/domain/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yoda/yoda.dart';
 
+/// Plant card for the [SearchPage]
+/// 
 class PlantCard extends ConsumerStatefulWidget {
   const PlantCard({
     required this.plantIndex,
@@ -36,44 +39,51 @@ class _PlantCardState extends ConsumerState<PlantCard> {
             return pl;
           });
         }
-        print('*********** $status');
       });
 
-    return Card(
-      elevation: 0,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(30)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset(plant.imageName),
-            const SizedBox(height: 12),
-            Text(
-              plant.name,
-              style: const TextStyle(fontWeight: FontWeight.w800),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              plant.shortDescr,
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '\$${plant.price}',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 18,
+    return GestureDetector(
+      onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (context) => DetailsPage(plant: plant),
                   ),
                 ),
-                yodaFx(yodaController, plant.favourite),
-              ],
-            ),
-          ],
+      child: Card(
+        elevation: 0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset(plant.imageName),
+              const SizedBox(height: 12),
+              Text(
+                plant.name,
+                style: const TextStyle(fontWeight: FontWeight.w800),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                plant.shortDescr,
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '\$${plant.price}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 18,
+                    ),
+                  ),
+                  yodaFx(yodaController, plant.favourite),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

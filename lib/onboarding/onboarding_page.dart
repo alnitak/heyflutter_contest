@@ -55,7 +55,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           children: [
             ConstrainedBox(
               constraints: BoxConstraints(
-                  maxHeight: MediaQuery.sizeOf(context).height * 0.4),
+                maxHeight: MediaQuery.sizeOf(context).height * 0.4,
+              ),
               child: Opacity(
                 opacity: scale,
                 child: Padding(

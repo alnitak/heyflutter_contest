@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
 import 'package:heyflutter/domain/provider.dart';
-import 'package:heyflutter/model/plant_model.dart';
 import 'package:heyflutter/ui/plant_card.dart';
 import 'package:heyflutter/ui/search_appbar.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SearchPage extends ConsumerWidget {
   const SearchPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:heyflutter/domain/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const SearchAppBar({super.key});
