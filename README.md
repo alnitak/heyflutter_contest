@@ -11,8 +11,10 @@ by implementing this UI Challenge: [YouTube video](https://www.youtube.com/live/
 - [freezed](https://pub.dev/packages/freezed) for the plant data model
 - [Yoda](https://github.com/alnitak/yoda) my plugin for the favourite icon animation
 - [StarMenu](https://github.com/alnitak/flutter_star_menu) my plugin to display cart drop down menu
+- [magnifying_glass](https://github.com/alnitak/magnifying_glass) my plugin to have a magnifier in the plant details page
 - [flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view) used for plants list page
 
 #### Notes 
 
 - plant items are hard-coded into `models/dummy.dart`
+- plant names, descriptions and short-descriptions are generated with the help of ChatGPT ;) and the plant images don't reflect their name and description!

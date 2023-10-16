@@ -30,7 +30,7 @@ class DetailsPage extends ConsumerWidget {
     return MagnifyingGlass(
       controller: magnifyingGlassController,
       glassPosition: GlassPosition.touchPosition,
-      borderThickness: 8.0,
+      borderThickness: 8,
       borderColor: Colors.grey,
       glassParams: GlassParams(
         startingPosition: const Offset(150, 150),
@@ -96,7 +96,7 @@ class DetailsPage extends ConsumerWidget {
   }
 }
 
-/// drop-down StarMenu when pressing the cart
+/// drop-down the StarMenu when pressing the cart
 ///
 // ignore: must_be_immutable
 class DropDown extends ConsumerWidget {
