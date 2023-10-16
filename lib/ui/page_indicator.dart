@@ -61,9 +61,11 @@ class _PageIndicatorState extends State<PageIndicator> {
             var increment = index - (widget.pageController.page ?? 0);
             increment = 1 - increment.abs().clamp(0, 1);
 
+            final width = 10.0 + increment * 20;
+            final height = 10.0+ sin(increment * pi) * 5;
             return Container(
-              width: 10 + increment * 20,
-              height: 10 + sin(increment * pi) * 5,
+              width: widget.axis == Axis.horizontal ? width : height,
+              height: widget.axis == Axis.horizontal ? height : width,
               margin: const EdgeInsets.all(4),
               decoration: BoxDecoration(
                 color: Colors.green,

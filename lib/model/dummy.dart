@@ -3,7 +3,11 @@ import 'package:heyflutter/model/plant_model.dart';
 /// hard-coded db items
 final dummyList = <PlantModel>[
   const PlantModel(
-    imageName: 'assets/1.png',
+    imageName: [
+      'assets/1.png',
+      'assets/1.png',
+      'assets/1.png',
+    ],
     name: 'name1',
     descr: 'descr1',
     shortDescr: 'shortDescr1',
@@ -14,7 +18,11 @@ final dummyList = <PlantModel>[
     favourite: false,
   ),
   const PlantModel(
-    imageName: 'assets/2.png',
+    imageName: [
+      'assets/2.png',
+      'assets/2.png',
+      'assets/2.png',
+    ],
     name: 'name2',
     descr: 'descr2',
     shortDescr: 'shortDescr2',
@@ -25,7 +33,11 @@ final dummyList = <PlantModel>[
     favourite: false,
   ),
   const PlantModel(
-    imageName: 'assets/3.png',
+    imageName: [
+      'assets/3.png',
+      'assets/3.png',
+      'assets/3.png',
+    ],
     name: 'name3',
     descr: 'descr3',
     shortDescr: 'shortDescr3',
@@ -36,7 +48,11 @@ final dummyList = <PlantModel>[
     favourite: false,
   ),
   const PlantModel(
-    imageName: 'assets/4.png',
+    imageName: [
+      'assets/4.png',
+      'assets/4.png',
+      'assets/4.png',
+    ],
     name: 'name4',
     descr: 'descr4',
     shortDescr: 'shortDescr4',
@@ -47,7 +63,11 @@ final dummyList = <PlantModel>[
     favourite: false,
   ),
   const PlantModel(
-    imageName: 'assets/5.png',
+    imageName: [
+      'assets/5.png',
+      'assets/5.png',
+      'assets/5.png',
+    ],
     name: 'name5',
     descr: 'descr5',
     shortDescr: 'shortDescr5',
@@ -58,7 +78,11 @@ final dummyList = <PlantModel>[
     favourite: false,
   ),
   const PlantModel(
-    imageName: 'assets/6.png',
+    imageName: [
+      'assets/6.png',
+      'assets/6.png',
+      'assets/6.png',
+    ],
     name: 'name6',
     descr: 'descr6',
     shortDescr: 'shortDescr6',
@@ -69,7 +93,11 @@ final dummyList = <PlantModel>[
     favourite: false,
   ),
   const PlantModel(
-    imageName: 'assets/7.png',
+    imageName: [
+      'assets/7.png',
+      'assets/7.png',
+      'assets/7.png',
+    ],
     name: 'name7',
     descr: 'descr7',
     shortDescr: 'shortDescr7',
@@ -80,7 +108,11 @@ final dummyList = <PlantModel>[
     favourite: false,
   ),
   const PlantModel(
-    imageName: 'assets/8.png',
+    imageName: [
+      'assets/8.png',
+      'assets/8.png',
+      'assets/8.png',
+    ],
     name: 'name8',
     descr: 'descr8',
     shortDescr: 'shortDescr8',

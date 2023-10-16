@@ -6,7 +6,9 @@ import 'package:heyflutter/domain/provider.dart';
 
 import 'package:heyflutter/model/plant_model.dart';
 import 'package:heyflutter/ui/details_bottom_navigation.dart';
+import 'package:heyflutter/ui/details_content.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:magnifying_glass/magnifying_glass.dart';
 import 'package:star_menu/star_menu.dart';
 
 /// Icons with descriptions for the [DetailsBottomNavigation]
@@ -21,39 +23,82 @@ class DetailsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cartList = ref.watch(cartProvider);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-        toolbarHeight: kToolbarHeight * 2.2,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(32),
-            child: IconButton(
-              icon: Badge(
-                isLabelVisible: cartList.isNotEmpty,
-                label: Text(cartList.length.toString()),
-                largeSize: 20,
-                child: DropDown(
-                  child: const Icon(Icons.shopping_cart_outlined),
+    final height = MediaQuery.sizeOf(context).height;
+    final magnifyingGlassController = MagnifyingGlassController();
+    var glassIsOpen = false;
+
+    return MagnifyingGlass(
+      controller: magnifyingGlassController,
+      glassPosition: GlassPosition.touchPosition,
+      borderThickness: 8.0,
+      borderColor: Colors.grey,
+      glassParams: GlassParams(
+        startingPosition: const Offset(150, 150),
+        diameter: 200,
+        distortion: 0.1,
+        magnification: 1.6,
+        padding: const EdgeInsets.all(10),
+      ),
+      child: Listener(
+        onPointerDown: (event) {
+          if (!glassIsOpen) {
+            magnifyingGlassController.closeGlass();
+          }
+        },
+        child: Scaffold(
+          resizeToAvoidBottomInset: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.black),
+            toolbarHeight: kToolbarHeight * 2.2,
+            actions: [
+              IconButton(
+                iconSize: 40,
+                onPressed: () {
+                  if (!glassIsOpen) {
+                    magnifyingGlassController.openGlass();
+                  }
+                },
+                icon: const Icon(Icons.search),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(32),
+                child: IconButton(
+                  icon: Badge(
+                    isLabelVisible: cartList.isNotEmpty,
+                    label: Text(cartList.length.toString()),
+                    largeSize: 20,
+                    child: DropDown(
+                      child: const Icon(Icons.shopping_cart_outlined),
+                    ),
+                  ),
+                  iconSize: 40,
+
+                  /// The onPressed is managed by [DropDown] which opens StarMenu
+                  onPressed: () {},
                 ),
               ),
-              iconSize: 40,
-              onPressed: () {},
-            ),
+            ],
           ),
-        ],
+          body: DetailsContent(
+            height: height * (1 - 0.28),
+            plant: plant,
+          ),
+          bottomNavigationBar: DetailsBottomNavigation(
+            height: height * 0.28,
+            plant: plant,
+          ),
+        ),
       ),
-      body: Image.asset(plant.imageName),
-      bottomNavigationBar: DetailsBottomNavigation(plant: plant),
     );
   }
 }
 
 /// drop-down StarMenu when pressing the cart
 ///
+// ignore: must_be_immutable
 class DropDown extends ConsumerWidget {
   DropDown({
     required this.child,
@@ -81,6 +126,7 @@ class DropDown extends ConsumerWidget {
         final newCart = [...cl!];
         return newCart;
       });
+
       /// refresh items by closing and opening again StarMenu
       controller.closeMenu!();
       Future.delayed(const Duration(milliseconds: 300), () {
@@ -129,7 +175,7 @@ class DropDown extends ConsumerWidget {
               children: [
                 /// Plant image
                 Image.asset(
-                  cl![index].imageName,
+                  cl![index].imageName.first,
                   height: 60,
                 ),
                 Padding(

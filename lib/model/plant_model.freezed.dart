@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PlantModel {
-  String get imageName => throw _privateConstructorUsedError;
+  List<String> get imageName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get descr => throw _privateConstructorUsedError;
   String get shortDescr => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $PlantModelCopyWith<$Res> {
       _$PlantModelCopyWithImpl<$Res, PlantModel>;
   @useResult
   $Res call(
-      {String imageName,
+      {List<String> imageName,
       String name,
       String descr,
       String shortDescr,
@@ -76,7 +76,7 @@ class _$PlantModelCopyWithImpl<$Res, $Val extends PlantModel>
       imageName: null == imageName
           ? _value.imageName
           : imageName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -122,7 +122,7 @@ abstract class _$$PlantModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String imageName,
+      {List<String> imageName,
       String name,
       String descr,
       String shortDescr,
@@ -156,9 +156,9 @@ class __$$PlantModelImplCopyWithImpl<$Res>
   }) {
     return _then(_$PlantModelImpl(
       imageName: null == imageName
-          ? _value.imageName
+          ? _value._imageName
           : imageName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -199,7 +199,7 @@ class __$$PlantModelImplCopyWithImpl<$Res>
 
 class _$PlantModelImpl implements _PlantModel {
   const _$PlantModelImpl(
-      {required this.imageName,
+      {required final List<String> imageName,
       required this.name,
       required this.descr,
       required this.shortDescr,
@@ -207,10 +207,17 @@ class _$PlantModelImpl implements _PlantModel {
       required this.height,
       required this.temp,
       required this.pot,
-      required this.favourite});
+      required this.favourite})
+      : _imageName = imageName;
 
+  final List<String> _imageName;
   @override
-  final String imageName;
+  List<String> get imageName {
+    if (_imageName is EqualUnmodifiableListView) return _imageName;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_imageName);
+  }
+
   @override
   final String name;
   @override
@@ -238,8 +245,8 @@ class _$PlantModelImpl implements _PlantModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PlantModelImpl &&
-            (identical(other.imageName, imageName) ||
-                other.imageName == imageName) &&
+            const DeepCollectionEquality()
+                .equals(other._imageName, _imageName) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.descr, descr) || other.descr == descr) &&
             (identical(other.shortDescr, shortDescr) ||
@@ -253,8 +260,17 @@ class _$PlantModelImpl implements _PlantModel {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, imageName, name, descr,
-      shortDescr, price, height, temp, pot, favourite);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_imageName),
+      name,
+      descr,
+      shortDescr,
+      price,
+      height,
+      temp,
+      pot,
+      favourite);
 
   @JsonKey(ignore: true)
   @override
@@ -265,7 +281,7 @@ class _$PlantModelImpl implements _PlantModel {
 
 abstract class _PlantModel implements PlantModel {
   const factory _PlantModel(
-      {required final String imageName,
+      {required final List<String> imageName,
       required final String name,
       required final String descr,
       required final String shortDescr,
@@ -276,7 +292,7 @@ abstract class _PlantModel implements PlantModel {
       required final bool favourite}) = _$PlantModelImpl;
 
   @override
-  String get imageName;
+  List<String> get imageName;
   @override
   String get name;
   @override

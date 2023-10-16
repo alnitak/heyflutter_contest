@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:heyflutter/model/dummy.dart';
-import 'package:heyflutter/onboarding/onboarding_page.dart';
 import 'package:heyflutter/search.dart';
-import 'package:heyflutter/ui/arrows.dart';
+import 'package:heyflutter/ui/onboarding_arrows.dart';
+import 'package:heyflutter/ui/onboarding_page.dart';
 import 'package:heyflutter/ui/page_indicator.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -16,12 +16,12 @@ class _OnBoardingState extends State<OnBoarding> {
   late PageController pageController;
 
   final assets = [
-    dummyList[0].imageName,
-    dummyList[4].imageName,
-    dummyList[7].imageName,
-    dummyList[6].imageName,
-    dummyList[5].imageName,
-    dummyList[2].imageName,
+    dummyList[0].imageName.first,
+    dummyList[4].imageName.first,
+    dummyList[7].imageName.first,
+    dummyList[6].imageName.first,
+    dummyList[5].imageName.first,
+    dummyList[2].imageName.first,
   ];
 
   @override
@@ -31,14 +31,20 @@ class _OnBoardingState extends State<OnBoarding> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    pageController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         elevation: 0,
         actions: [
+          /// Skip button
           Padding(
             padding: const EdgeInsets.only(right: 24),
             child: TextButton(

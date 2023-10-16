@@ -58,7 +58,7 @@ class _PlantCardState extends ConsumerState<PlantCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(plant.imageName),
+              Image.asset(plant.imageName.first),
               const SizedBox(height: 12),
               Text(
                 plant.name,

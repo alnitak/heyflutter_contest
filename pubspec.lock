@@ -379,6 +379,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  magnifying_glass:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "v2.0.1"
+      resolved-ref: "89303850e0f69832161f09511db0659c76332b0f"
+      url: "https://github.com/alnitak/magnifying_glass.git"
+    source: git
+    version: "2.0.1"
   matcher:
     dependency: transitive
     description:

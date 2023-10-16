@@ -14,6 +14,10 @@ dependencies:
   freezed: ^2.4.5
   freezed_annotation: ^2.4.1
   hooks_riverpod: ^2.4.3
+  magnifying_glass:
+    git:
+      url: https://github.com/alnitak/magnifying_glass.git
+      ref: v2.0.1
   riverpod_annotation: ^2.2.0
   star_menu:
     git:

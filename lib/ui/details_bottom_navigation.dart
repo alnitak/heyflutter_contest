@@ -10,16 +10,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 ///
 class DetailsBottomNavigation extends ConsumerWidget {
   const DetailsBottomNavigation({
+    required this.height,
     required this.plant,
     super.key,
   });
 
+  final double height;
   final PlantModel plant;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: MediaQuery.sizeOf(context).height * 0.28,
+      height: height,
       decoration: const BoxDecoration(
         color: Colors.green,
         borderRadius: BorderRadius.only(
@@ -95,8 +97,9 @@ class DetailsBottomNavigation extends ConsumerWidget {
                     highlightColor: Colors.black12,
                     onTap: () {
                       ref.read(cartProvider.notifier).update((state) {
-                        final addedPlant =
-                            [...ref.read(cartProvider)..add(plant)];
+                        final addedPlant = [
+                          ...ref.read(cartProvider)..add(plant)
+                        ];
                         return addedPlant;
                       });
                     },

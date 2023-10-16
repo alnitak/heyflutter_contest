@@ -7,7 +7,7 @@ part 'plant_model.freezed.dart';
 @freezed
 class PlantModel with _$PlantModel{
   const factory PlantModel({
-    required String imageName,
+    required List<String> imageName,
     required String name,
     required String descr,
     required String shortDescr,
