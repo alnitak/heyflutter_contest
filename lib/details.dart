@@ -58,24 +58,45 @@ class DropDown extends ConsumerWidget {
   DropDown({
     required this.child,
     super.key,
-  }) : cl = [];
+  })  : cl = [],
+        deleteItemCallback = null;
 
   final Widget child;
 
   final List<PlantModel>? cl;
 
+  /// The [StarMenu.lazyItems] callback needs to use [WidgetRef] to delete
+  /// items, but it can't be passed as argument. So inside the lazyItem callback
+  /// use this function
+  void Function(int index)? deleteItemCallback;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = StarMenuController();
     cl?.addAll(ref.read(cartProvider));
 
+    deleteItemCallback = (int index) {
+      ref.read(cartProvider.notifier).update((state) {
+        cl!.removeAt(index);
+        final newCart = [...cl!];
+        return newCart;
+      });
+      /// refresh items by closing and opening again StarMenu
+      controller.closeMenu!();
+      Future.delayed(const Duration(milliseconds: 300), () {
+        controller.openMenu!();
+      });
+    };
+
     return StarMenu(
+      controller: controller,
       params: StarMenuParameters(
         shape: MenuShape.linear,
         centerOffset: const Offset(-160, 30),
         boundaryBackground: BoundaryBackground(
           color: Colors.green.withOpacity(0.1),
-          blurSigmaX: 10,
-          blurSigmaY: 10,
+          blurSigmaX: 6,
+          blurSigmaY: 6,
         ),
         linearShapeParams: LinearShapeParams(
           angle: -90,
@@ -83,9 +104,6 @@ class DropDown extends ConsumerWidget {
           alignment: LinearAlignment.left,
         ),
       ),
-      onItemTapped: (index, controller) {
-        controller.closeMenu!();
-      },
       lazyItems: cartList,
       child: child,
     );
@@ -145,7 +163,9 @@ class DropDown extends ConsumerWidget {
                 ),
                 IconButton(
                   iconSize: 40,
-                  onPressed: () {},
+                  onPressed: () {
+                    deleteItemCallback?.call(index);
+                  },
                   icon: const Icon(
                     Icons.delete,
                     color: Colors.red,
@@ -157,7 +177,8 @@ class DropDown extends ConsumerWidget {
         ),
       );
     })
-    /// add cart total price
+
+      /// add cart total price
       ..add(
         SizedBox(
           width: 280,
@@ -165,7 +186,7 @@ class DropDown extends ConsumerWidget {
           child: Align(
             alignment: Alignment.bottomRight,
             child: Text(
-              'Tot: \$$cartPrice',
+              'Tot: \$${cartPrice.toStringAsFixed(2)}',
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
