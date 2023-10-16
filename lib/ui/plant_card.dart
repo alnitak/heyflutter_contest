@@ -7,8 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yoda/yoda.dart';
 
 /// Plant card for the [SearchPage]
-/// 
-class PlantCard extends ConsumerStatefulWidget {
+///
+class PlantCard extends ConsumerWidget {
   const PlantCard({
     required this.plantIndex,
     super.key,
@@ -17,58 +17,73 @@ class PlantCard extends ConsumerStatefulWidget {
   final int plantIndex;
 
   @override
-  ConsumerState<PlantCard> createState() => _PlantCardState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final plant = ref.read(searchPlantsProvider).elementAt(plantIndex);
+    final favourite = ValueNotifier(plant.favourite);
 
-class _PlantCardState extends ConsumerState<PlantCard> {
-  @override
-  Widget build(BuildContext context) {
-    final plant = ref.read(dummyListProvider).elementAt(widget.plantIndex);
-    ref.watch(
-      dummyListProvider.select((value) => value[widget.plantIndex].favourite),
-    );
+    /// watch this single item
+    // ref.watch(
+    //   searchPlantsProvider.select((value) => value[plantIndex].favourite),
+    // );
 
     final yodaController = YodaController()
       ..addStatusListener((status, context) {
         if (status == AnimationStatus.forward) {}
         if (status == AnimationStatus.completed ||
             status == AnimationStatus.dismissed) {
-          ref.read(dummyListProvider.notifier).update((state) {
-            final pl = [...ref.read(dummyListProvider)];
-            pl[widget.plantIndex] = plant.copyWith(favourite: !plant.favourite);
-            return pl;
-          });
+          final dummyIndex = ref.read(dummyListProvider).indexWhere(
+                (element) => element == plant,
+              );
+
+          /// update remote db (here only on [dummy.dart])
+          if (dummyIndex != -1) {
+            ref.read(dummyListProvider.notifier).update((state) {
+              final pl = [...ref.read(dummyListProvider)];
+              pl[dummyIndex] = plant.copyWith(favourite: !plant.favourite);
+              return pl;
+            });
+          }
+
+          // update current search list
+          favourite.value = !favourite.value;
         }
       });
 
     return GestureDetector(
       onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (context) => DetailsPage(plant: plant),
-                  ),
-                ),
+        context,
+        MaterialPageRoute<void>(
+          builder: (context) => DetailsPage(plant: plant),
+        ),
+      ),
       child: Card(
         elevation: 0,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30)),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(18),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              /// Image
               Image.asset(plant.imageName.first),
               const SizedBox(height: 12),
+
+              /// Plant name
               Text(
                 plant.name,
                 style: const TextStyle(fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 4),
+
+              /// plant descr
               Text(
                 plant.shortDescr,
               ),
               const SizedBox(height: 24),
+
+              /// price & fav icon
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -76,10 +91,15 @@ class _PlantCardState extends ConsumerState<PlantCard> {
                     '\$${plant.price}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w800,
-                      fontSize: 18,
+                      fontSize: 16,
                     ),
                   ),
-                  yodaFx(yodaController, plant.favourite),
+                  ValueListenableBuilder(
+                    valueListenable: favourite,
+                    builder: (_, isFavourite, __) {
+                      return yodaFx(yodaController, isFavourite);
+                    },
+                  ),
                 ],
               ),
             ],
@@ -111,7 +131,7 @@ class _PlantCardState extends ConsumerState<PlantCard> {
       startWhenTapped: true,
       child: IconButton(
         onPressed: null,
-        iconSize: 40,
+        iconSize: 36,
         icon: isFavourite
             ? Image.asset('assets/like_selected.png')
             : Image.asset('assets/like.png'),

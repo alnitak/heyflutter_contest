@@ -27,6 +27,7 @@ dependencies:
     git:
       url: https://github.com/alnitak/yoda.git
       ref: v1.0.2
+  universal_io: ^2.2.2
 
 dev_dependencies:
   build_runner: ^2.4.6

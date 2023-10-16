@@ -14,9 +14,9 @@ class SearchPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size(0, 200),
+        preferredSize: const Size(0, 160),
         child: Padding(
-          padding: const EdgeInsets.only(top: 32),
+          padding: const EdgeInsets.only(top: 22),
           child: AppBar(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
@@ -39,14 +39,22 @@ class SearchPage extends ConsumerWidget {
       body: MasonryGridView.count(
         crossAxisCount: 2,
         padding: const EdgeInsets.all(32),
-        mainAxisSpacing: 32,
-        crossAxisSpacing: 32,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
         itemCount: plantList.length + 1,
         itemBuilder: (context, index) {
           if (index == 0) return resultsCount(plantList.length);
           return PlantCard(plantIndex: index - 1);
         },
       ),
+      // body: ListView.builder(
+      //   itemCount: plantList.length,
+      //   itemExtent: 120,
+      //   itemBuilder: (context, index) {
+      //     print('plantList.length: ${plantList.length}  index: $index');
+      //     return FittedBox(child: PlantCard(plantIndex: index));
+      //   },
+      // ),
     );
   }
 }
@@ -54,10 +62,10 @@ class SearchPage extends ConsumerWidget {
 Widget resultsCount(int count) {
   return Center(
     child: Text(
-      count == 0 ? 'Nothing\nFound'
-      : (count == 1 ? 'Found\n$count Result' : 'Found\n$count Results'),
-      textScaleFactor: 3,
-      style: const TextStyle(fontWeight: FontWeight.bold),
+      count == 0
+          ? 'Nothing\nFound'
+          : (count == 1 ? 'Found\n$count Result' : 'Found\n$count Results'),
+      style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
     ),
   );
 }

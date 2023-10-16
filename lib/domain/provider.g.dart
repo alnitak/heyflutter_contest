@@ -6,7 +6,7 @@ part of 'provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchPlantsHash() => r'e339ac9fbd0c0efd7964ed3a46339ad4df5a60c5';
+String _$searchPlantsHash() => r'375cfa9807714f003c3b0bbe54615cad83536264';
 
 /// provider that stores the search results
 ///

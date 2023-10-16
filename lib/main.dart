@@ -30,8 +30,8 @@ class MainApp extends StatelessWidget {
         // enable mouse dragging
         dragDevices: PointerDeviceKind.values.toSet(),
       ),
-      home: const SearchPage(),
-      // home: OnBoarding(),
+      // home: const SearchPage(),
+      home: OnBoarding(),
     );
   }
 }

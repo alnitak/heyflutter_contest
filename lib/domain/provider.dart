@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'provider.g.dart';
 
-/// Dummy plants list 
+/// Dummy plants list
 final dummyListProvider = StateProvider<List<PlantModel>>((ref) => dummyList);
 
 /// provider to store the cart
@@ -16,13 +16,15 @@ final cartProvider = StateProvider<List<PlantModel>>((ref) => []);
 final searchTextProvider = StateProvider<String>((ref) => '');
 
 /// provider that stores the search results
-@riverpod
+@Riverpod(keepAlive: false)
 List<PlantModel> searchPlants(SearchPlantsRef ref) {
   final text = ref.watch(searchTextProvider);
   final plantList = ref.read(dummyListProvider);
-  return plantList
-      .where(
-        (element) => element.name.contains(text),
-      )
-      .toList();
+  final pl = plantList.where(
+    (element) {
+      return element.name.toLowerCase().contains(text.toLowerCase()) ||
+          element.shortDescr.toLowerCase().contains(text.toLowerCase());
+    },
+  ).toList();
+  return pl;
 }

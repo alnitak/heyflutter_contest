@@ -1,6 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs
 import 'package:flutter/material.dart';
 import 'package:heyflutter/model/plant_model.dart';
+import 'package:heyflutter/ui/detail_plant_image_page.dart';
 import 'package:heyflutter/ui/page_indicator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -40,6 +41,7 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
       child: Stack(
         children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// Plant image
@@ -104,7 +106,11 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
   List<Widget> pages() {
     return List.generate(
       widget.plant.imageName.length,
-      (index) => Image.asset(widget.plant.imageName[index]),
+      (index) => DetailPlantImagePage(
+        pageController: pageController,
+        pageId: index,
+        uiImage: Image.asset(widget.plant.imageName[index]),
+      ),
     );
   }
 }

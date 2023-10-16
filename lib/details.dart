@@ -1,15 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:heyflutter/domain/provider.dart';
-
 import 'package:heyflutter/model/plant_model.dart';
 import 'package:heyflutter/ui/details_bottom_navigation.dart';
 import 'package:heyflutter/ui/details_content.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:magnifying_glass/magnifying_glass.dart';
 import 'package:star_menu/star_menu.dart';
+import 'package:universal_io/io.dart';
 
 /// Icons with descriptions for the [DetailsBottomNavigation]
 class DetailsPage extends ConsumerWidget {
@@ -41,8 +39,9 @@ class DetailsPage extends ConsumerWidget {
       ),
       child: Listener(
         onPointerDown: (event) {
-          if (!glassIsOpen) {
+          if (glassIsOpen) {
             magnifyingGlassController.closeGlass();
+            glassIsOpen = false;
           }
         },
         child: Scaffold(
@@ -59,6 +58,7 @@ class DetailsPage extends ConsumerWidget {
                 onPressed: () {
                   if (!glassIsOpen) {
                     magnifyingGlassController.openGlass();
+                    glassIsOpen = true;
                   }
                 },
                 icon: const Icon(Icons.search),
@@ -146,7 +146,7 @@ class DropDown extends ConsumerWidget {
         ),
         linearShapeParams: LinearShapeParams(
           angle: -90,
-          space: Platform.isAndroid || Platform.isIOS ? -10 : 10,
+          space: Platform.isAndroid || Platform.isIOS ? -10 : 13,
           alignment: LinearAlignment.left,
         ),
       ),
@@ -172,11 +172,15 @@ class DropDown extends ConsumerWidget {
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           children: <TableRow>[
             TableRow(
+              decoration: const BoxDecoration(color: Colors.white54),
               children: [
                 /// Plant image
-                Image.asset(
-                  cl![index].imageName.first,
-                  height: 60,
+                Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: Image.asset(
+                    cl![index].imageName.first,
+                    height: 60,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8, right: 12),
@@ -228,7 +232,7 @@ class DropDown extends ConsumerWidget {
       ..add(
         SizedBox(
           width: 280,
-          height: 60,
+          height: 40,
           child: Align(
             alignment: Alignment.bottomRight,
             child: Text(

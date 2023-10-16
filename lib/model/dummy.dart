@@ -14,7 +14,7 @@ final dummyList = <PlantModel>[
     price: 12.99,
     height: (min: 25.0, max: 30.0),
     temp: (min: 20, max: 25),
-    pot: 'pot1',
+    pot: 'Ciramic Pot',
     favourite: false,
   ),
   const PlantModel(
@@ -29,7 +29,7 @@ final dummyList = <PlantModel>[
     price: 12.99,
     height: (min: 25.0, max: 30.0),
     temp: (min: 20, max: 25),
-    pot: 'pot2',
+    pot: 'Ciramic Pot',
     favourite: false,
   ),
   const PlantModel(
@@ -44,7 +44,7 @@ final dummyList = <PlantModel>[
     price: 12.99,
     height: (min: 25.0, max: 30.0),
     temp: (min: 20, max: 25),
-    pot: 'pot3',
+    pot: 'Ciramic Pot',
     favourite: false,
   ),
   const PlantModel(
@@ -59,7 +59,7 @@ final dummyList = <PlantModel>[
     price: 12.99,
     height: (min: 25.0, max: 30.0),
     temp: (min: 20, max: 25),
-    pot: 'pot4',
+    pot: 'Ciramic Pot',
     favourite: false,
   ),
   const PlantModel(
@@ -74,7 +74,7 @@ final dummyList = <PlantModel>[
     price: 12.99,
     height: (min: 25.0, max: 30.0),
     temp: (min: 20, max: 25),
-    pot: 'pot5',
+    pot: 'Ciramic Pot',
     favourite: false,
   ),
   const PlantModel(
@@ -89,7 +89,7 @@ final dummyList = <PlantModel>[
     price: 12.99,
     height: (min: 25.0, max: 30.0),
     temp: (min: 20, max: 25),
-    pot: 'pot6',
+    pot: 'Ciramic Pot',
     favourite: false,
   ),
   const PlantModel(
@@ -104,7 +104,7 @@ final dummyList = <PlantModel>[
     price: 12.99,
     height: (min: 25.0, max: 30.0),
     temp: (min: 20, max: 25),
-    pot: 'pot7',
+    pot: 'Ciramic Pot',
     favourite: false,
   ),
   const PlantModel(
@@ -119,7 +119,7 @@ final dummyList = <PlantModel>[
     price: 12.99,
     height: (min: 25.0, max: 30.0),
     temp: (min: 20, max: 25),
-    pot: 'pot8',
+    pot: 'Ciramic Pot',
     favourite: false,
   ),
 ];

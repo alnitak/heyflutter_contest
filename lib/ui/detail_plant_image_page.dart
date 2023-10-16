@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:flutter/material.dart';
 
-/// onboarding PageView
+/// Plant PageView in [DetailsPage]
 /// 
-class OnBoardingPage extends StatefulWidget {
-  const OnBoardingPage({
+class DetailPlantImagePage extends StatefulWidget {
+  const DetailPlantImagePage({
     required this.pageId,
     required this.uiImage,
     required this.pageController,
@@ -16,10 +17,10 @@ class OnBoardingPage extends StatefulWidget {
   final PageController pageController;
 
   @override
-  State<OnBoardingPage> createState() => _OnBoardingPageState();
+  State<DetailPlantImagePage> createState() => _DetailPlantImagePageState();
 }
 
-class _OnBoardingPageState extends State<OnBoardingPage> {
+class _DetailPlantImagePageState extends State<DetailPlantImagePage> {
   late double scale;
   @override
   void initState() {
@@ -59,36 +60,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               constraints: BoxConstraints(
                 maxHeight: MediaQuery.sizeOf(context).height * 0.4,
               ),
-              child: Opacity(
-                opacity: scale,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 64,
-                    right: 64,
-                  ),
+              child: Transform.scale(
+                scale: 0.5 + scale/2,
+                child: Opacity(
+                  opacity: scale,
                   child: widget.uiImage,
                 ),
-              ),
-            ),
-            RichText(
-              textScaleFactor: 3.5 * scale,
-              text: TextSpan(
-                text: 'Enjoy your\nLife with ',
-                style: DefaultTextStyle.of(context).style.copyWith(
-                  shadows: [
-                    const Shadow(
-                      blurRadius: 16,
-                      offset: Offset(4, 4),
-                      color: Colors.black54,
-                    ),
-                  ],
-                ),
-                children: const <TextSpan>[
-                  TextSpan(
-                    text: 'Plants',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                ],
               ),
             ),
           ],
