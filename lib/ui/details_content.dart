@@ -48,7 +48,7 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
               Align(
                 alignment: Alignment.topCenter,
                 child: SizedBox(
-                  height: widget.height * 0.6,
+                  height: widget.height * 0.55,
                   child: PageView(
                     controller: pageController,
                     allowImplicitScrolling: true,
@@ -62,7 +62,7 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
         
               /// Plant description
               Padding(
-                padding: const EdgeInsets.only(left: 48, right: 48),
+                padding: const EdgeInsets.only(bottom: 16, left: 48, right: 48),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -91,7 +91,7 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
           /// images page indicator
           Positioned(
             right: 50,
-            top: widget.height * 0.6 - 80,
+            top: widget.height * 0.5 - 50,
             child: PageIndicator(
               pageController: pageController,
               axis: Axis.vertical,

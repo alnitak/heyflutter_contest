@@ -28,3 +28,14 @@ List<PlantModel> searchPlants(SearchPlantsRef ref) {
   ).toList();
   return pl;
 }
+
+/// provider that stores cart total price
+@Riverpod(keepAlive: true)
+double cartTotalPrice(CartTotalPriceRef ref) {
+  final plantList = ref.watch(cartProvider);
+  var cartPrice = 0.0;
+  for (final element in plantList) {
+    cartPrice += element.price;
+  }
+  return cartPrice;
+}

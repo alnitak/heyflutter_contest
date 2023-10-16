@@ -22,5 +22,22 @@ final searchPlantsProvider = AutoDisposeProvider<List<PlantModel>>.internal(
 );
 
 typedef SearchPlantsRef = AutoDisposeProviderRef<List<PlantModel>>;
+String _$cartTotalPriceHash() => r'0c0c161114dc30e962b84d9bd635680664424e41';
+
+/// provider that stores cart total price
+///
+/// Copied from [cartTotalPrice].
+@ProviderFor(cartTotalPrice)
+final cartTotalPriceProvider = Provider<double>.internal(
+  cartTotalPrice,
+  name: r'cartTotalPriceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$cartTotalPriceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef CartTotalPriceRef = ProviderRef<double>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

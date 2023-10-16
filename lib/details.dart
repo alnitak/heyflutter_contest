@@ -51,7 +51,7 @@ class DetailsPage extends ConsumerWidget {
             shadowColor: Colors.transparent,
             elevation: 0,
             iconTheme: const IconThemeData(color: Colors.black),
-            toolbarHeight: kToolbarHeight * 2.2,
+            toolbarHeight: kToolbarHeight * 1.5,
             actions: [
               IconButton(
                 iconSize: 40,
@@ -63,26 +63,26 @@ class DetailsPage extends ConsumerWidget {
                 },
                 icon: const Icon(Icons.search),
               ),
-              Padding(
-                padding: const EdgeInsets.all(32),
-                child: IconButton(
-                  icon: Badge(
-                    isLabelVisible: cartList.isNotEmpty,
-                    label: Text(cartList.length.toString()),
-                    largeSize: 20,
-                    child: DropDown(
-                      child: const Icon(Icons.shopping_cart_outlined),
-                    ),
+              const SizedBox(width: 24),
+              IconButton(
+                icon: Badge(
+                  isLabelVisible: cartList.isNotEmpty,
+                  label: Text(cartList.length.toString()),
+                  largeSize: 20,
+                  child: DropDown(
+                    child: const Icon(Icons.shopping_cart_outlined),
                   ),
-                  iconSize: 40,
-
-                  /// The onPressed is managed by [DropDown] which opens StarMenu
-                  onPressed: () {},
                 ),
+                iconSize: 40,
+
+                /// The onPressed is managed by [DropDown] which opens StarMenu
+                onPressed: () {},
               ),
+              const SizedBox(width: 24),
             ],
           ),
           body: DetailsContent(
+            /// the height is the Scaffold height minus bottomNavigationBar
             height: height * (1 - 0.28),
             plant: plant,
           ),
@@ -115,10 +115,13 @@ class DropDown extends ConsumerWidget {
   /// use this function
   void Function(int index)? deleteItemCallback;
 
+  late double cartPrice;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = StarMenuController();
     cl?.addAll(ref.read(cartProvider));
+    cartPrice = ref.read(cartTotalPriceProvider);
 
     deleteItemCallback = (int index) {
       ref.read(cartProvider.notifier).update((state) {
@@ -157,9 +160,7 @@ class DropDown extends ConsumerWidget {
 
   /// build the item list lazily
   Future<List<Widget>> cartList() async {
-    var cartPrice = 0.0;
     final ret = List<Widget>.generate(cl!.length, (index) {
-      cartPrice += cl![index].price;
       return SizedBox(
         width: 280,
         height: 60,

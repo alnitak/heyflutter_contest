@@ -65,7 +65,7 @@ class DetailsBottomNavigation extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Total Price',
+                    'Plant Price',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

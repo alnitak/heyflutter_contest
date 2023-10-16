@@ -53,22 +53,12 @@ class _DetailPlantImagePageState extends State<DetailPlantImagePage> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: MediaQuery.sizeOf(context).height * 0.4,
-              ),
-              child: Transform.scale(
-                scale: 0.5 + scale/2,
-                child: Opacity(
-                  opacity: scale,
-                  child: widget.uiImage,
-                ),
-              ),
-            ),
-          ],
+        Transform.scale(
+          scale: 0.5 + scale/2,
+          child: Opacity(
+            opacity: scale,
+            child: widget.uiImage,
+          ),
         ),
       ],
     );
