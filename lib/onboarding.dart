@@ -20,8 +20,6 @@ class _OnBoardingState extends State<OnBoarding> {
     dummyList[4].imageName.first,
     dummyList[7].imageName.first,
     dummyList[6].imageName.first,
-    dummyList[5].imageName.first,
-    dummyList[2].imageName.first,
   ];
 
   @override
@@ -85,7 +83,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 );
               },
               onNextPressed: () {
-                if (pageController.page!.floor() == 5) {
+                if (pageController.page!.floor() >= assets.length-1) {
                   /// next button pressed in the last page
                   Navigator.popUntil(context, (predicate) => predicate.isFirst);
                   Navigator.push(
@@ -103,6 +101,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 }
               },
             ),
+            const SizedBox(height: 16),
             PageIndicator(pageController: pageController),
           ],
         ),
