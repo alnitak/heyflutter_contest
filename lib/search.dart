@@ -47,14 +47,6 @@ class SearchPage extends ConsumerWidget {
           return PlantCard(plantIndex: index - 1);
         },
       ),
-      // body: ListView.builder(
-      //   itemCount: plantList.length,
-      //   itemExtent: 120,
-      //   itemBuilder: (context, index) {
-      //     print('plantList.length: ${plantList.length}  index: $index');
-      //     return FittedBox(child: PlantCard(plantIndex: index));
-      //   },
-      // ),
     );
   }
 }

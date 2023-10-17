@@ -20,12 +20,7 @@ class PlantCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final plant = ref.read(searchPlantsProvider).elementAt(plantIndex);
     final favourite = ValueNotifier(plant.favourite);
-
-    /// watch this single item
-    // ref.watch(
-    //   searchPlantsProvider.select((value) => value[plantIndex].favourite),
-    // );
-
+    
     final yodaController = YodaController()
       ..addStatusListener((status, context) {
         if (status == AnimationStatus.forward) {}
@@ -35,7 +30,7 @@ class PlantCard extends ConsumerWidget {
                 (element) => element == plant,
               );
 
-          /// update remote db (here only on [dummy.dart])
+          /// update "remote db" (here only on [dummy.dart])
           if (dummyIndex != -1) {
             ref.read(dummyListProvider.notifier).update((state) {
               final pl = [...ref.read(dummyListProvider)];
