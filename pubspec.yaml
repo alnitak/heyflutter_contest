@@ -21,7 +21,7 @@ dependencies:
   magnifying_glass:
     git:
       url: https://github.com/alnitak/magnifying_glass.git
-      ref: v2.0.1
+      ref: v2.1.0
   riverpod_annotation: ^2.2.0
   star_menu:
     git:

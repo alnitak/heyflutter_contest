@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:heyflutter/onboarding.dart';
-import 'package:heyflutter/search.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
@@ -14,6 +13,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
@@ -30,8 +30,7 @@ class MainApp extends StatelessWidget {
         // enable mouse dragging
         dragDevices: PointerDeviceKind.values.toSet(),
       ),
-      // home: const SearchPage(),
-      home: OnBoarding(),
+      home: const OnBoarding(),
     );
   }
 }

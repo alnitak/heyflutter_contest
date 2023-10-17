@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:heyflutter/domain/provider.dart';
 import 'package:heyflutter/ui/plant_card.dart';
+import 'package:heyflutter/ui/scaffold_builder.dart';
 import 'package:heyflutter/ui/search_appbar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -36,16 +37,18 @@ class SearchPage extends ConsumerWidget {
           ),
         ),
       ),
-      body: MasonryGridView.count(
-        crossAxisCount: 2,
-        padding: const EdgeInsets.all(32),
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-        itemCount: plantList.length + 1,
-        itemBuilder: (context, index) {
-          if (index == 0) return resultsCount(plantList.length);
-          return PlantCard(plantIndex: index - 1);
-        },
+      body: ScaffoldBuilder(
+        child: MasonryGridView.count(
+          crossAxisCount: 2,
+          padding: const EdgeInsets.all(32),
+          mainAxisSpacing: 16,
+          crossAxisSpacing: 16,
+          itemCount: plantList.length + 1,
+          itemBuilder: (context, index) {
+            if (index == 0) return resultsCount(plantList.length);
+            return PlantCard(plantIndex: index - 1);
+          },
+        ),
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:heyflutter/domain/provider.dart';
 import 'package:heyflutter/model/plant_model.dart';
 import 'package:heyflutter/ui/details_bottom_navigation.dart';
 import 'package:heyflutter/ui/details_content.dart';
+import 'package:heyflutter/ui/scaffold_builder.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:magnifying_glass/magnifying_glass.dart';
 import 'package:star_menu/star_menu.dart';
@@ -25,6 +26,9 @@ class DetailsPage extends ConsumerWidget {
     final magnifyingGlassController = MagnifyingGlassController();
     var glassIsOpen = false;
 
+    /// to prevent the child of MagnifyingGlass to be rebuilt
+    final scaffoldKey = GlobalKey();
+
     return MagnifyingGlass(
       controller: magnifyingGlassController,
       glassPosition: GlassPosition.touchPosition,
@@ -38,6 +42,7 @@ class DetailsPage extends ConsumerWidget {
         padding: const EdgeInsets.all(10),
       ),
       child: Listener(
+        key: scaffoldKey,
         onPointerDown: (event) {
           if (glassIsOpen) {
             magnifyingGlassController.closeGlass();
@@ -81,10 +86,12 @@ class DetailsPage extends ConsumerWidget {
               const SizedBox(width: 24),
             ],
           ),
-          body: DetailsContent(
-            /// the height is the Scaffold height minus bottomNavigationBar
-            height: height * (1 - 0.28),
-            plant: plant,
+          body: ScaffoldBuilder(
+            child: DetailsContent(
+              /// the height is the Scaffold height minus bottomNavigationBar
+              height: height * (1 - 0.28),
+              plant: plant,
+            ),
           ),
           bottomNavigationBar: DetailsBottomNavigation(
             height: height * 0.28,

@@ -392,11 +392,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "v2.0.1"
-      resolved-ref: "89303850e0f69832161f09511db0659c76332b0f"
+      ref: "v2.1.0"
+      resolved-ref: "9114f44bcf1e201119874541d9637a1661ee563d"
       url: "https://github.com/alnitak/magnifying_glass.git"
     source: git
-    version: "2.0.1"
+    version: "2.1.0"
   matcher:
     dependency: transitive
     description:

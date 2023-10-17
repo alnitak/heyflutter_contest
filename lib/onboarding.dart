@@ -4,6 +4,7 @@ import 'package:heyflutter/search.dart';
 import 'package:heyflutter/ui/onboarding_arrows.dart';
 import 'package:heyflutter/ui/onboarding_page.dart';
 import 'package:heyflutter/ui/page_indicator.dart';
+import 'package:heyflutter/ui/scaffold_builder.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -62,11 +63,13 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
         ],
       ),
-      body: PageView(
-        controller: pageController,
-        allowImplicitScrolling: true,
-        onPageChanged: (value) {},
-        children: pages(),
+      body: ScaffoldBuilder(
+        child: PageView(
+          controller: pageController,
+          allowImplicitScrolling: true,
+          onPageChanged: (value) {},
+          children: pages(),
+        ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 48),
