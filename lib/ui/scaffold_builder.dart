@@ -9,6 +9,7 @@ import 'package:universal_io/io.dart';
 ///     child: [our original scaffold body],
 ///   ),
 /// )
+/// ```
 class ScaffoldBuilder extends StatelessWidget {
   const ScaffoldBuilder({
     required this.child,
@@ -23,7 +24,7 @@ class ScaffoldBuilder extends StatelessWidget {
     if (!(Platform.isAndroid || Platform.isAndroid)) {
       return Center(
         child: AspectRatio(
-          aspectRatio: 520 / 1000,
+          aspectRatio: 700 / 1000,
           child: child,
         ),
       );
