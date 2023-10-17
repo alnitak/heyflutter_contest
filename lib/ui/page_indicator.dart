@@ -49,31 +49,28 @@ class _PageIndicatorState extends State<PageIndicator> {
   Widget build(BuildContext context) {
     if (pageCount == 0) return const SizedBox.shrink();
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 32),
-      child: Flex(
-        direction: widget.axis!,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(
-          pageCount.toInt(),
-          (index) {
-            /// calculate the displayed percentage of the page with id [index]
-            var increment = index - (widget.pageController.page ?? 0);
-            increment = 1 - increment.abs().clamp(0, 1);
+    return Flex(
+      direction: widget.axis!,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        pageCount.toInt(),
+        (index) {
+          /// calculate the displayed percentage of the page with id [index]
+          var increment = index - (widget.pageController.page ?? 0);
+          increment = 1 - increment.abs().clamp(0, 1);
 
-            final width = 10.0 + increment * 20;
-            final height = 10.0+ sin(increment * pi) * 5;
-            return Container(
-              width: widget.axis == Axis.horizontal ? width : height,
-              height: widget.axis == Axis.horizontal ? height : width,
-              margin: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(20),
-              ),
-            );
-          },
-        ),
+          final width = 10.0 + increment * 20;
+          final height = 10.0+ sin(increment * pi) * 5;
+          return Container(
+            width: widget.axis == Axis.horizontal ? width : height,
+            height: widget.axis == Axis.horizontal ? height : width,
+            margin: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.circular(20),
+            ),
+          );
+        },
       ),
     );
   }

@@ -10,6 +10,7 @@ by implementing this UI Challenge: [YouTube video](https://www.youtube.com/live/
 - [hooks_riverpod](https://pub.dev/packages/hooks_riverpod) is my choosen awesome state manager used with [riverpod_generator](https://pub.dev/packages/riverpod_generator)
 - [freezed](https://pub.dev/packages/freezed) for the plant data model
 - [universal_io](https://pub.dev/packages/universal_io) to use Platform on web
+- [flutter_shaders](https://github.com/jonahwilliams/flutter_shaders) to make the water effect in the plant details page
 - [Yoda](https://github.com/alnitak/yoda) my plugin for the favourite icon animation
 - [StarMenu](https://github.com/alnitak/flutter_star_menu) my plugin to display cart drop down menu
 - [magnifying_glass](https://github.com/alnitak/magnifying_glass) my plugin to have a magnifier in the plant details page
@@ -19,3 +20,5 @@ by implementing this UI Challenge: [YouTube video](https://www.youtube.com/live/
 
 - plant items are hard-coded into `models/dummy.dart`
 - plant names, descriptions and short-descriptions are generated with the help of ChatGPT ;) and the plant images don't reflect their name and description!
+- in the dummy plant items "db", are stored all the images available to make a working scroll of the choosen plant in its details page. Instead of searching for many images of the same plant on the web, I preferred to do this for simplicity in this example.
+- in the bottom left of plat details page, the sketch indicates a "Total Price" maybe to indicate the total cart price. This could puzzle the user when he press the "Add to Cart" button. Instead I show the current plant price and the total cart price is displayed in the drop down menu cart icon.

@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, comment_references
 
 import 'package:flutter/material.dart';
 
@@ -51,7 +51,7 @@ class _DetailPlantImagePageState extends State<DetailPlantImagePage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.center,
+      alignment: Alignment.bottomCenter,
       children: [
         Transform.scale(
           scale: 0.5 + scale/2,

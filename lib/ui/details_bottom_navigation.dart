@@ -98,7 +98,7 @@ class DetailsBottomNavigation extends ConsumerWidget {
                     onTap: () {
                       ref.read(cartProvider.notifier).update((state) {
                         final addedPlant = [
-                          ...ref.read(cartProvider)..add(plant)
+                          ...ref.read(cartProvider)..add(plant),
                         ];
                         return addedPlant;
                       });
