@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: avoid_positional_boolean_parameters, comment_references
 
 import 'package:flutter/material.dart';
 import 'package:heyflutter/details.dart';

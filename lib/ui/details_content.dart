@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:heyflutter/model/plant_model.dart';
 import 'package:heyflutter/ui/detail_plant_image_page.dart';
+import 'package:heyflutter/ui/detail_plant_shader.dart';
 import 'package:heyflutter/ui/page_indicator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -21,11 +22,13 @@ class DetailsContent extends ConsumerStatefulWidget {
 
 class _DetailsContentState extends ConsumerState<DetailsContent> {
   late PageController pageController;
+  late ValueNotifier<int> currPage;
 
   @override
   void initState() {
     super.initState();
     pageController = PageController();
+    currPage = ValueNotifier(0);
   }
 
   @override
@@ -36,70 +39,101 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: Stack(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// Plant image
-              Align(
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  height: widget.height * 0.55,
-                  child: PageView(
-                    controller: pageController,
-                    allowImplicitScrolling: true,
-                    scrollDirection: Axis.vertical,
-                    onPageChanged: (value) {},
-                    children: pages(),
+    final imagePageViewHeight = widget.height * 0.55;
+    return Stack(
+      children: [
+
+        Align(
+          alignment: Alignment.topCenter,
+          child: SizedBox(
+            height: imagePageViewHeight,
+            child: Transform.flip(
+              flipX: true,
+              flipY: true,
+              child: Transform.translate(
+                offset: Offset(0, -imagePageViewHeight+20),
+                child: Transform.scale(
+                  alignment: Alignment.bottomCenter,
+                  scaleY: 0.4,
+                  child: ValueListenableBuilder(
+                    valueListenable: currPage,
+                    builder: (_, pageId, __) {
+                      return PlantShader(
+                        img: Image.asset(
+                          widget.plant.imageName[pageId],
+                        ),
+                        pageController: pageController,
+                      );
+                    },
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
-        
-              /// Plant description
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16, left: 48, right: 48),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.plant.name,
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      widget.plant.descr,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
-        
-          /// images page indicator
-          Positioned(
-            right: 50,
-            top: widget.height * 0.5 - 50,
+        ),
+
+        /// Plant PageView images
+        Align(
+          alignment: Alignment.topCenter,
+          child: SizedBox(
+            height: imagePageViewHeight,
+            child: PageView(
+              controller: pageController,
+              allowImplicitScrolling: true,
+              scrollDirection: Axis.vertical,
+              onPageChanged: (value) => currPage.value = value,
+              children: pages(),
+            ),
+          ),
+        ),
+
+        /// Plant description
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: ColoredBox(
+            color: Theme.of(context).scaffoldBackgroundColor.withAlpha(180),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16, left: 48, right: 48),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.plant.name,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    widget.plant.descr,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+
+        /// images page indicator
+        Align(
+          // right: 32,
+          // top: imagePageViewHeight - 50,
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 32),
             child: PageIndicator(
               pageController: pageController,
               axis: Axis.vertical,
             ),
           ),
-        
-        ],
-      ),
+        ),
+      ],
     );
   }
 

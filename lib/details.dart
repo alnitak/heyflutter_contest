@@ -149,17 +149,17 @@ class DropDown extends ConsumerWidget {
         ),
         linearShapeParams: LinearShapeParams(
           angle: -90,
-          space: Platform.isAndroid || Platform.isIOS ? -10 : 13,
+          space: Platform.isAndroid || Platform.isIOS ? 0 : 13,
           alignment: LinearAlignment.left,
         ),
       ),
-      lazyItems: cartList,
+      lazyItems: cartItemsList,
       child: child,
     );
   }
 
   /// build the item list lazily
-  Future<List<Widget>> cartList() async {
+  Future<List<Widget>> cartItemsList() async {
     final ret = List<Widget>.generate(cl!.length, (index) {
       return SizedBox(
         width: 280,
@@ -173,7 +173,7 @@ class DropDown extends ConsumerWidget {
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           children: <TableRow>[
             TableRow(
-              decoration: const BoxDecoration(color: Colors.white54),
+              decoration: const BoxDecoration(color: Colors.white24),
               children: [
                 /// Plant image
                 Padding(
