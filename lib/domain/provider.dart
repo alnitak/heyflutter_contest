@@ -15,20 +15,24 @@ final cartProvider = StateProvider<List<PlantModel>>((ref) => []);
 /// provider to trigger the search
 final searchTextProvider = StateProvider<String>((ref) => '');
 
-/// provider that stores the search results
+final priceRangeProvider =
+    StateProvider<({double min, double max})>((ref) => (min: 0, max: 150));
+
+/// provider that stores the search results by name
 @Riverpod(keepAlive: false)
 List<PlantModel> searchPlants(SearchPlantsRef ref) {
   final text = ref.watch(searchTextProvider);
+  final range = ref.watch(priceRangeProvider);
   final plantList = ref.read(dummyListProvider);
   final pl = plantList.where(
     (element) {
-      return element.name.toLowerCase().contains(text.toLowerCase()) ||
-          element.shortDescr.toLowerCase().contains(text.toLowerCase());
+      return (element.name.toLowerCase().contains(text.toLowerCase()) ||
+          element.shortDescr.toLowerCase().contains(text.toLowerCase())) &&
+          (element.price < range.max && element.price > range.min);
     },
   ).toList();
   return pl;
 }
-
 /// provider that stores cart total price
 @Riverpod(keepAlive: true)
 double cartTotalPrice(CartTotalPriceRef ref) {

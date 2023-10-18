@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:heyflutter/domain/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:star_menu/star_menu.dart';
 
 /// Search bar for the [SearchPage] AppBar
 class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
@@ -12,6 +13,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final text = ref.read(searchTextProvider);
     final controller = TextEditingController(text: text);
+    final smController = StarMenuController();
     return Padding(
       padding: const EdgeInsets.only(left: 32, right: 32, bottom: 4),
       child: Flex(
@@ -46,13 +48,28 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
             color: const Color.fromARGB(255, 249, 249, 249),
             clipBehavior: Clip.antiAlias,
             child: IntrinsicHeight(
-              child: MaterialButton(
-                minWidth: 60,
-                height: 60,
-                child: const Icon(Icons.tune, size: 36),
-                onPressed: () {
-                  // TODO settings?
-                },
+              child: StarMenu(
+                controller: smController,
+                params: StarMenuParameters(
+                  shape: MenuShape.linear,
+                  centerOffset: const Offset(-160, 30),
+                  boundaryBackground: BoundaryBackground(
+                    color: Colors.green.withOpacity(0.1),
+                    blurSigmaX: 6,
+                    blurSigmaY: 6,
+                  ),
+                  linearShapeParams: const LinearShapeParams(
+                    angle: -90,
+                    alignment: LinearAlignment.left,
+                  ),
+                ),
+                items: const [PriceRange()],
+                child: MaterialButton(
+                  minWidth: 60,
+                  height: 60,
+                  child: const Icon(Icons.tune, size: 36),
+                  onPressed: () {},
+                ),
               ),
             ),
           ),
@@ -63,4 +80,61 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size(15, 200);
+}
+
+/// Price range slider for the button in the SearchBar
+class PriceRange extends ConsumerWidget {
+  const PriceRange({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final priceRange = ref.watch(priceRangeProvider);
+    return SizedBox(
+      width: 350,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(6),
+                color: Colors.white60,
+                child: Text(
+                  '\$${priceRange.min.toInt()}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              const Text(
+                'Price Range',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Container(
+                padding: const EdgeInsets.all(6),
+                color: Colors.white60,
+                child: Text(
+                  '\$${priceRange.max.toInt()}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          RangeSlider(
+            values: RangeValues(priceRange.min, priceRange.max),
+            max: 150,
+            divisions: 30,
+            onChanged: (range) {
+              ref
+                  .read(priceRangeProvider.notifier)
+                  .update((state) => (min: range.start, max: range.end));
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
