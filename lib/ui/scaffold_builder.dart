@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_io/io.dart';
 
@@ -21,7 +22,10 @@ class ScaffoldBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!(Platform.isAndroid || Platform.isAndroid)) {
+    /// To check if the app is run on the mobile browser
+    final isWebOnMobile = kIsWeb && (Platform.isAndroid || Platform.isAndroid);
+
+    if (!(Platform.isAndroid || Platform.isAndroid) && !isWebOnMobile) {
       return Center(
         child: AspectRatio(
           aspectRatio: 700 / 1000,

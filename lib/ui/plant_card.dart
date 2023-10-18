@@ -20,7 +20,7 @@ class PlantCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final plant = ref.read(searchPlantsProvider).elementAt(plantIndex);
     final favourite = ValueNotifier(plant.favourite);
-    
+
     final yodaController = YodaController()
       ..addStatusListener((status, context) {
         if (status == AnimationStatus.forward) {}
@@ -62,7 +62,10 @@ class PlantCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// Image
-              Image.asset(plant.imageName.first),
+              Hero(
+                tag: plant.imageName.first,
+                child: Image.asset(plant.imageName.first),
+              ),
               const SizedBox(height: 12),
 
               /// Plant name

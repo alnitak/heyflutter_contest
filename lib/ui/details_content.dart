@@ -42,7 +42,7 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
     final imagePageViewHeight = widget.height * 0.55;
     return Stack(
       children: [
-
+        /// plant shader
         Align(
           alignment: Alignment.topCenter,
           child: SizedBox(
@@ -51,7 +51,7 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
               flipX: true,
               flipY: true,
               child: Transform.translate(
-                offset: Offset(0, -imagePageViewHeight+20),
+                offset: Offset(0, -imagePageViewHeight + 20),
                 child: Transform.scale(
                   alignment: Alignment.bottomCenter,
                   scaleY: 0.4,
@@ -122,8 +122,6 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
 
         /// images page indicator
         Align(
-          // right: 32,
-          // top: imagePageViewHeight - 50,
           alignment: Alignment.bottomRight,
           child: Padding(
             padding: const EdgeInsets.only(right: 32),
@@ -143,7 +141,12 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
       (index) => DetailPlantImagePage(
         pageController: pageController,
         pageId: index,
-        uiImage: Image.asset(widget.plant.imageName[index]),
+        uiImage: index == 0
+            ? Hero(
+                tag: widget.plant.imageName.first,
+                child: Image.asset(widget.plant.imageName[index]),
+              )
+            : Image.asset(widget.plant.imageName[index]),
       ),
     );
   }

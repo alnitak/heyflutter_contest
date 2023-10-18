@@ -61,15 +61,15 @@ class _PlantShaderState extends State<PlantShader>
         (context, shader, child) {
           return AnimatedSampler(
             (image, size, canvas) {
-              shader.setFloatUniforms((uniforms) {
+              shader..setFloatUniforms((uniforms) {
                 uniforms
                   ..setSize(size) // iResolution
                   ..setFloat(sw.elapsedMilliseconds / 1000.0) // iTime
                   ..setFloats(
-                      [size.width / 2, size.height / 2, 0, 0]); // iMouse
-              });
+                      [size.width / 2, size.height / 2, 0, 0],); // iMouse
+              })
 
-              shader.setImageSampler(0, image);
+              ..setImageSampler(0, image);
 
               canvas.drawRect(
                 Rect.fromLTWH(0, 0, size.width, size.height),

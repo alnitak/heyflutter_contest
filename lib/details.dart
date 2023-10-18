@@ -31,7 +31,6 @@ class DetailsPage extends ConsumerWidget {
 
     return MagnifyingGlass(
       controller: magnifyingGlassController,
-      glassPosition: GlassPosition.touchPosition,
       borderThickness: 8,
       borderColor: Colors.grey,
       glassParams: GlassParams(
