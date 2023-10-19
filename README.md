@@ -29,9 +29,9 @@ by implementing this UI Challenge: [YouTube video](https://www.youtube.com/live/
 
 <table>
 <tr>
-	<td>onBoarding</td>
-	<td>search</td>
-	<td>details</td>
+	<td>onBoarding page</td>
+	<td>search page</td>
+	<td>details page</td>
 </tr>
 <tr>
 	<td width=185 valign="top">
@@ -45,3 +45,5 @@ by implementing this UI Challenge: [YouTube video](https://www.youtube.com/live/
 	</td>
 </tr>
 </table>
+
+[*try online*](https://marcobavagnoli.com/heyflutter_contest/)
