@@ -89,8 +89,9 @@ class PriceRange extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final priceRange = ref.watch(priceRangeProvider);
-    return SizedBox(
-      width: 350,
+    final width = MediaQuery.sizeOf(context).width;
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: width*0.7),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

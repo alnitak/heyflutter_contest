@@ -75,8 +75,8 @@ class DetailsPage extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.shopping_cart_outlined),
                         iconSize: 40,
-              
-                        /// The onPressed is managed by [DropDown] 
+
+                        /// The onPressed is managed by [DropDown]
                         /// which opens StarMenu
                         onPressed: () {},
                       ),
@@ -127,13 +127,11 @@ class DropDown extends ConsumerWidget {
 
   List<PlantModel> cl = [];
   StarMenuController controller = StarMenuController();
-  double cartPrice = 0;
   void Function(int index)? deleteItem;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     cl = [...ref.watch(cartProvider)];
-    cartPrice = ref.read(cartTotalPriceProvider);
 
     /// [StarMenu.lazyItems] doesn't accept parameter. In this case
     /// I'd pass the [ref] to delete the item of [cartProvider], but instead
@@ -255,12 +253,18 @@ class DropDown extends ConsumerWidget {
           height: 40,
           child: Align(
             alignment: Alignment.bottomRight,
-            child: Text(
-              'Tot: \$${cartPrice.toStringAsFixed(2)}',
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-              ),
+            child: Consumer(
+              builder: (_, WidgetRef ref, __) {
+                final cartPrice = ref.watch(cartTotalPriceProvider);
+
+                return Text(
+                  'Tot: \$${cartPrice.toStringAsFixed(2)}',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                );
+              },
             ),
           ),
         ),
