@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:heyflutter/domain/provider.dart';
 import 'package:heyflutter/model/plant_model.dart';
-import 'package:heyflutter/ui/details_bottom_navigation.dart';
-import 'package:heyflutter/ui/details_content.dart';
+import 'package:heyflutter/ui/detail/details_bottom_navigation.dart';
+import 'package:heyflutter/ui/detail/details_content.dart';
 import 'package:heyflutter/ui/scaffold_builder.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:magnifying_glass/magnifying_glass.dart';
@@ -11,7 +11,7 @@ import 'package:star_menu/star_menu.dart';
 import 'package:universal_io/io.dart';
 
 /// Icons with descriptions for the [DetailsBottomNavigation]
-class DetailsPage extends ConsumerWidget {
+class DetailsPage extends StatelessWidget {
   const DetailsPage({
     required this.plant,
     super.key,
@@ -20,8 +20,7 @@ class DetailsPage extends ConsumerWidget {
   final PlantModel plant;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final cartList = ref.watch(cartProvider);
+  Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     final magnifyingGlassController = MagnifyingGlassController();
     var glassIsOpen = false;
@@ -68,19 +67,32 @@ class DetailsPage extends ConsumerWidget {
                 icon: const Icon(Icons.search),
               ),
               const SizedBox(width: 24),
-              IconButton(
-                icon: Badge(
-                  isLabelVisible: cartList.isNotEmpty,
-                  label: Text(cartList.length.toString()),
-                  largeSize: 20,
-                  child: DropDown(
-                    child: const Icon(Icons.shopping_cart_outlined),
-                  ),
+              Align(
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    DropDown(
+                      child: IconButton(
+                        icon: const Icon(Icons.shopping_cart_outlined),
+                        iconSize: 40,
+              
+                        /// The onPressed is managed by [DropDown] 
+                        /// which opens StarMenu
+                        onPressed: () {},
+                      ),
+                    ),
+                    Consumer(
+                      builder: (_, WidgetRef ref, __) {
+                        final cartList = ref.watch(cartProvider);
+                        return Badge(
+                          isLabelVisible: cartList.isNotEmpty,
+                          label: Text(cartList.length.toString()),
+                          largeSize: 20,
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                iconSize: 40,
-
-                /// The onPressed is managed by [DropDown] which opens StarMenu
-                onPressed: () {},
               ),
               const SizedBox(width: 24),
             ],
@@ -109,36 +121,31 @@ class DropDown extends ConsumerWidget {
   DropDown({
     required this.child,
     super.key,
-  })  : cl = [],
-        deleteItemCallback = null;
+  });
 
   final Widget child;
 
-  final List<PlantModel>? cl;
-
-  /// The [StarMenu.lazyItems] callback needs to use [WidgetRef] to delete
-  /// items, but it can't be passed as argument. So inside the lazyItem callback
-  /// use this function
-  void Function(int index)? deleteItemCallback;
-
-  late double cartPrice;
+  List<PlantModel> cl = [];
+  StarMenuController controller = StarMenuController();
+  double cartPrice = 0;
+  void Function(int index)? deleteItem;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = StarMenuController();
-    cl?.addAll(ref.read(cartProvider));
+    cl = [...ref.watch(cartProvider)];
     cartPrice = ref.read(cartTotalPriceProvider);
 
-    deleteItemCallback = (int index) {
-      ref.read(cartProvider.notifier).update((state) {
-        cl!.removeAt(index);
-        final newCart = [...cl!];
-        return newCart;
-      });
-
-      /// refresh items by closing and opening again StarMenu
-      controller.closeMenu!();
+    /// [StarMenu.lazyItems] doesn't accept parameter. In this case
+    /// I'd pass the [ref] to delete the item of [cartProvider], but instead
+    /// I will call this function to delete it
+    deleteItem = (index) {
+      /// wait for the menu to close
       Future.delayed(const Duration(milliseconds: 300), () {
+        cl.removeAt(index);
+        ref.read(cartProvider.notifier).update((state) {
+          final newCart = [...cl];
+          return newCart;
+        });
         controller.openMenu!();
       });
     };
@@ -159,6 +166,7 @@ class DropDown extends ConsumerWidget {
           alignment: LinearAlignment.left,
         ),
       ),
+      // items: cartItemsList(ref),
       lazyItems: cartItemsList,
       child: child,
     );
@@ -166,9 +174,9 @@ class DropDown extends ConsumerWidget {
 
   /// build the item list lazily
   Future<List<Widget>> cartItemsList() async {
-    final ret = List<Widget>.generate(cl!.length, (index) {
+    final ret = List<Widget>.generate(cl.length, (index) {
       return SizedBox(
-        width: 280,
+        width: 300,
         height: 60,
         child: Table(
           columnWidths: const <int, TableColumnWidth>{
@@ -185,7 +193,7 @@ class DropDown extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.all(4),
                   child: Image.asset(
-                    cl![index].imageName.first,
+                    cl[index].imageName.first,
                     height: 60,
                   ),
                 ),
@@ -196,7 +204,9 @@ class DropDown extends ConsumerWidget {
                     children: [
                       /// Plant name
                       Text(
-                        cl![index].name,
+                        cl[index].name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -208,7 +218,7 @@ class DropDown extends ConsumerWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          '\$${cl![index].price}',
+                          '\$${cl[index].price}',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
@@ -221,7 +231,10 @@ class DropDown extends ConsumerWidget {
                 IconButton(
                   iconSize: 40,
                   onPressed: () {
-                    deleteItemCallback?.call(index);
+                    /// refresh items by closing and opening again StarMenu
+                    controller.closeMenu!();
+
+                    deleteItem?.call(index);
                   },
                   icon: const Icon(
                     Icons.delete,

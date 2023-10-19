@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs
 import 'package:flutter/material.dart';
 import 'package:heyflutter/model/plant_model.dart';
-import 'package:heyflutter/ui/detail_plant_image_page.dart';
-import 'package:heyflutter/ui/detail_plant_shader.dart';
+import 'package:heyflutter/ui/detail/detail_plant_image_page.dart';
+import 'package:heyflutter/ui/detail/detail_plant_shader.dart';
 import 'package:heyflutter/ui/page_indicator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

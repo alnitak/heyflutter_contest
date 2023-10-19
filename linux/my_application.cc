@@ -47,7 +47,7 @@ static void my_application_activate(GApplication* application) {
     gtk_window_set_title(window, "heyflutter");
   }
 
-  gtk_window_set_default_size(window, 520, 1000);
+  gtk_window_set_default_size(window, 600, 1000);
   gtk_widget_show(GTK_WIDGET(window));
 
   g_autoptr(FlDartProject) project = fl_dart_project_new();

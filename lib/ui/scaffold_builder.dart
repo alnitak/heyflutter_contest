@@ -28,7 +28,7 @@ class ScaffoldBuilder extends StatelessWidget {
     if (!(Platform.isAndroid || Platform.isAndroid) && !isWebOnMobile) {
       return Center(
         child: AspectRatio(
-          aspectRatio: 700 / 1000,
+          aspectRatio: 7 / 10,
           child: child,
         ),
       );

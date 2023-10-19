@@ -23,3 +23,5 @@ by implementing this UI Challenge: [YouTube video](https://www.youtube.com/live/
 - in the dummy plant items "db", are stored all the images available to make a working scroll of the choosen plant in its details page. Instead of searching for many images of the same plant on the web, I preferred to do this for simplicity in this example.
 - in the bottom left of plat details page, the sketch indicates a "Total Price" maybe to indicate the total cart price. This could puzzle the user when he press the "Add to Cart" button. Instead I show the current plant price and the total cart price is displayed in the drop down menu cart icon.
 - the shader used in the plant detail page comes from https://www.shadertoy.com/view/4djGzz
+- on desktop and web (not on the mobile browser) the Scaffold aspect ratio body has been fixed to 7/10
+- on Android it is better to not open the app within the WebView but instead with the normal mobile browser

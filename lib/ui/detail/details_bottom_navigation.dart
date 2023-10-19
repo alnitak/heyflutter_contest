@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:heyflutter/domain/provider.dart';
 import 'package:heyflutter/model/plant_model.dart';
-import 'package:heyflutter/ui/plant_feature.dart';
+import 'package:heyflutter/ui/search/plant_feature.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// Bottom sheet of the plant detail page
