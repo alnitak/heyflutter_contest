@@ -46,3 +46,12 @@ by implementing this UI Challenge: [YouTube video](https://www.youtube.com/live/
 </table>
 
 [*try online*](https://marcobavagnoli.com/heyflutter_contest/)
+
+
+*Where to reach me:*
+<div id="badges">
+  <a href="https://www.linkedin.com/in/marco-bavagnoli/"><img src="https://img.shields.io/badge/LinkedIn-blue?logo=linkedin" alt="LinkedIn Badge"/></a>
+  <a href="https://www.youtube.com/@MarcoBavagnoli/videos"><img src="https://img.shields.io/badge/YouTube-red?logo=youtube&logoColor=white" alt="Youtube Badge"/></a>
+  <a href="https://twitter.com/lildeimos"><img src="https://img.shields.io/badge/Twitter-blue?logo=twitter&logoColor=white" alt="Twitter Badge"/></a>
+</div>
+
