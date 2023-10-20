@@ -10,7 +10,6 @@ by implementing this UI Challenge: [YouTube video](https://www.youtube.com/live/
 - [hooks_riverpod](https://pub.dev/packages/hooks_riverpod) ©® by [Remi Rousselet](https://github.com/rrousselGit), is my choosen awesome state manager used with [riverpod_generator](https://pub.dev/packages/riverpod_generator)
 - [freezed](https://pub.dev/packages/freezed) ©® by [Remi Rousselet](https://github.com/rrousselGit), for the plant data model
 - [universal_io](https://pub.dev/packages/universal_io) ©® by [Dint](https://github.com/dint-dev), to use Platform on web
-- [flutter_shaders](https://github.com/jonahwilliams/flutter_shaders) ©® by [Jonah Williams](https://github.com/jonahwilliams), to make the water effect in the plant details page
 - [flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view) ©® by [Romain Rastel](https://github.com/letsar), used for plants list page
 - [Yoda](https://github.com/alnitak/yoda) my plugin for the favourite icon animation
 - [StarMenu](https://github.com/alnitak/flutter_star_menu) my plugin to display cart drop down menu

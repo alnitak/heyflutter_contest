@@ -39,7 +39,8 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
 
   @override
   Widget build(BuildContext context) {
-    final imagePageViewHeight = widget.height * 0.55;
+    const scale = 0.55;
+    final imagePageViewHeight = widget.height * scale;
     return Stack(
       children: [
         /// plant shader
@@ -59,10 +60,10 @@ class _DetailsContentState extends ConsumerState<DetailsContent> {
                     valueListenable: currPage,
                     builder: (_, pageId, __) {
                       return PlantShader(
-                        img: Image.asset(
-                          widget.plant.imageName[pageId],
-                        ),
+                        key: UniqueKey(),
+                        imgAsset: widget.plant.imageName[pageId],
                         pageController: pageController,
+                        scale: 0.55,
                       );
                     },
                   ),

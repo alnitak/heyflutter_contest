@@ -262,15 +262,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.3"
-  flutter_shaders:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: main
-      resolved-ref: be68f3470a1c2452662d80910955dccb29c89f7b
-      url: "https://github.com/jonahwilliams/flutter_shaders"
-    source: git
-    version: "0.1.2"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
