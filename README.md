@@ -26,6 +26,8 @@ by implementing this UI Challenge: [YouTube video](https://www.youtube.com/live/
 - on Android it is better to not open the app within the WebView but instead with the normal mobile browser
 
 
+
+
 <table>
 <tr>
 	<td>onBoarding page</td>
@@ -34,13 +36,13 @@ by implementing this UI Challenge: [YouTube video](https://www.youtube.com/live/
 </tr>
 <tr>
 	<td width=185 valign="top">
-		<img width=185 src="https://github.com/alnitak/heyflutter_contest/assets/192827/2189b200-a823-4035-a0a1-226b1fe37f3c"></img>
+		<img width=185 src="https://github.com/alnitak/heyflutter_contest/assets/192827/217ca937-c3c8-4891-a076-6edc06e888c0"></img>
 	</td>
 	<td width=185 valign="top">
-		<img width=185 src="https://github.com/alnitak/heyflutter_contest/assets/192827/c1b6b16c-c2f2-4a57-ae1c-c907501d7120"></img>
+		<img width=185 src="https://github.com/alnitak/heyflutter_contest/assets/192827/d0384172-4865-4332-a64a-ad44ec307e01"></img>
 	</td>
 	<td width=185 valign="top">
-		<img width=185 src="https://github.com/alnitak/heyflutter_contest/assets/192827/c74c4bda-6303-4469-a28d-efbc1ac6a5e6"></img>
+		<img width=185 src="https://github.com/alnitak/heyflutter_contest/assets/192827/586cb736-2a19-4a3d-b918-7690a3361a4f"></img>
 	</td>
 </tr>
 </table>
